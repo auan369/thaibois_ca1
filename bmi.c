@@ -36,8 +36,28 @@ char* returnBMIStatus(float bmi, int asian){ // function to return the status as
     return bmi_status;
 }
 
+void printStatusTable(float bmi, int asian, char* state, char* bmi_status){ // function to print the status as table
+    printf("\n");
+    printf("|----------------|------------------------\n");
+    printf("|BMI:            |%.2f\n", bmi);
+    printf("|----------------|------------------------\n");
+    printf("|Asian/Non-Asian:|");
+    if (asian) {
+        printf("Asian\n");
+    }
+    else {
+        printf("Non-Asian\n");
+        }
+    printf("|----------------|------------------------\n");
+    printf("|BMI State:      |%s\n", state);
+    printf("|----------------|------------------------\n");
+    printf("|Remarks:        |%s\n", bmi_status);
+    printf("|----------------|------------------------\n");
+
+}
 
 int main(int argc, char const *argv[]){
+    //! input mass, height and asian status via scanf
     float mass = 90.7;
     printf("Enter your mass in kg: ");
     scanf("%f", &mass);
@@ -49,6 +69,9 @@ int main(int argc, char const *argv[]){
     scanf("%s", &temp_asian);
     int asian = 0;
     if (temp_asian == 'y') asian = 1;
+
+
+    //! computes BMI and returns the status
     float bmi = computeBMI(mass, height);
     float cut;
     printf("Mass(kg): %.2f\n",mass);
@@ -60,11 +83,14 @@ int main(int argc, char const *argv[]){
 
     char* state  = returnBMIStatus(bmi, asian);
     printf("BMI State: %s\n", state);
-
+    char bmi_status[100];
     printf("Remarks: ");
     cut = (bmi-bmi_checkpoints[asian][1]) * pow(height, 2); // mass to cut to become normal
-    if (cut > 0) printf("You are fat! Please reduce your weight by %.2fkg to remain in the Normal range!\n", cut);
-    else printf("You are in the healthy weight range. Maintain your weight you don't want to be a fat ass\n\n");
+    if (cut > 0)  sprintf(bmi_status, "You are fat! Please reduce your weight by %.2fkg to remain in the Normal range!\n", cut);  
+    else sprintf(bmi_status, "You are in the healthy weight range. Maintain your weight you don't want to be a fat ass\n\n");
 
+    printf(bmi_status);
+    //! print the status as table
+    printStatusTable(bmi, asian, state, bmi_status);
     return 0;
 }
