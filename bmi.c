@@ -39,8 +39,16 @@ char* returnBMIStatus(float bmi, int asian){ // function to return the status as
 
 int main(int argc, char const *argv[]){
     float mass = 90.7;
+    printf("Enter your mass in kg: ");
+    scanf("%f", &mass);
     float height = 1.79;
+    printf("Enter your height in m: ");
+    scanf("%f", &height);
+    char temp_asian = "n";
+    printf("Are you Asian? (y/n): ");
+    scanf("%s", &temp_asian);
     int asian = 0;
+    if (temp_asian == 'y') asian = 1;
     float bmi = computeBMI(mass, height);
     float cut;
     printf("Mass(kg): %.2f\n",mass);
