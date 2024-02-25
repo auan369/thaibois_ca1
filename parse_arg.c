@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+// testing out parsearg function
 
 void parse_arg(int argc, char const *argv[] ,float *mass, float *height, int *asian){
     // *mass = atof(argv[1]);
