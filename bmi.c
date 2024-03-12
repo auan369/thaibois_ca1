@@ -105,12 +105,22 @@ int main(int argc, char const *argv[]){
     if (mass<20 || mass > 200){
         printf("Enter your mass in kg: ");
         scanf("%f", &mass);
+        while (mass < 20 || mass > 200 ){ //checking for invalid data
+            printf("Invalid mass input, please enter again: ");
+            while(getchar() != '\n');
+            scanf("%f", &mass);
+        }
     }
     if (height <0.5 || height > 2.8){
         printf("Enter your height in m: ");
         scanf("%f", &height);
+        while (height < 0.5 || height > 2.8 ){ //checking for invalid data
+            printf("Invalid height input, please enter again: "); 
+            while(getchar() != '\n');
+            scanf("%f", &height);
+        }
     }
-    if (asian == 3){
+    while (asian == 3){
         printf("Are you Asian? (y/n): ");
         scanf("%s", &temp_asian);
         switch (temp_asian){
@@ -124,7 +134,7 @@ int main(int argc, char const *argv[]){
                 break;
             default:
                 asian = 3; //error
-                printf("Invalid input argument for Asian. Key in manually later\n\n");
+                printf("Invalid input argument for Asian. Key in again\n\n");
                 break;
         }
     }
@@ -146,10 +156,10 @@ int main(int argc, char const *argv[]){
     
     // printf("Remarks: ");
     cut = (bmi-bmi_checkpoints[asian][1]) * pow(height, 2); // mass to cut to become normal
-    if (cut > 0)  sprintf(bmi_status, "You are fat! Please reduce your weight by %.2fkg to remain in the Normal range!\n", cut);  
-    else sprintf(bmi_status, "You are in the healthy weight range. Maintain your weight you don't want to be a fat ass\n\n");
+    if (cut > 0)  sprintf(bmi_status, "You are fat! Please reduce your weight by %.2fkg to remain in the Normal range!", cut);  
+    else sprintf(bmi_status, "You are in the healthy weight range. Maintain your weight you don't want to be a fat ass");
 
-    printf(bmi_status);
+    // printf(bmi_status);
     //! print the status as table
     printStatusTable(mass, height, bmi, asian, state, bmi_status);
 
