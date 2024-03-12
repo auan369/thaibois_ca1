@@ -6,6 +6,7 @@
 *.dll
 *.so
 *.dylib
+.obj
 
 # Ignore log files and temp files
 *.log
