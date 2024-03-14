@@ -31,6 +31,12 @@ char* returnBMIStatus(float bmi, int asian){ // function to return the status as
     
                                                                            
     bmi_status = (char*)malloc(12*sizeof(char)); //allocate memory to store string
+    if (bmi_status == NULL){ // check memory is allocated correctly
+        printf("Not Enough Memory! Exiting Program\n");
+        exit(1);
+    }
+
+    // check which category the user falls into based on their bmi value and race
     if (bmi < bmi_checkpoints[asian][0]) strcpy(bmi_status, "Low");
     else if (bmi < bmi_checkpoints[asian][1]) strcpy(bmi_status, "Normal");
     else if (bmi <= bmi_checkpoints[asian][2]) strcpy(bmi_status, "Overweight");
