@@ -18,7 +18,7 @@ Thio Zheng Yeng
 
 
 // define global variables
-float bmi_checkpoints[2][3] = {{18.5, 24.9, 29.9 }, {18.5, 23.0, 27.5 }}; // represent the list of values to check for each weight category
+const float bmi_checkpoints[2][3] = {{18.5, 24.9, 29.9 }, {18.5, 23.0, 27.5 }}; // represent the list of values to check for each weight category
                                                                             //bmi_checkpoint[0] for non-asian, bmi_checkpoint[1] for asian
 
 // define functions used 
