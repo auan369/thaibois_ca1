@@ -17,9 +17,9 @@ Thio Zheng Yeng
 
 
 
-// define global variables
+// define global constants
 const float bmi_checkpoints[2][3] = {{18.5, 24.9, 29.9 }, {18.5, 23.0, 27.5 }}; // represent the list of values to check for each weight category
-                                                                            //bmi_checkpoint[0] for non-asian, bmi_checkpoint[1] for asian
+                                                                                //bmi_checkpoint[0] for non-asian, bmi_checkpoint[1] for asian
 
 // define functions used 
 float computeBMI(float mass, float height){ // mass in kg, height in m
@@ -107,6 +107,7 @@ int main(int argc, char const *argv[]){
     char temp_asian = 'n';
 
     parse_arg(argc, argv, &mass, &height, &asian);
+
     // input error from command line checking
     if (mass<20 || mass > 200){
         printf("Enter your mass in kg: ");
@@ -145,22 +146,14 @@ int main(int argc, char const *argv[]){
         }
     }
 
-
-
     bmi = computeBMI(mass, height);
 
     status  = returnBMIStatus(bmi, asian);
-    // printf("BMI State: %s\n", state);
 
-
-    
-    // printf("Remarks: ");
     cut = (bmi-bmi_checkpoints[asian][1]) * pow(height, 2); // mass to cut to become normal
     if (cut > 0)  sprintf(remarks, "You are fat! Please reduce your weight by %.2fkg to remain in the Normal range!", cut);  
     else sprintf(remarks, "You are in the healthy weight range. Maintain your weight you don't want to be a fat ass");
 
-    // printf(bmi_status);
-    //! print the status as table
     printStatusTable(mass, height, bmi, asian, status, remarks);
 
     free((void*) status);
