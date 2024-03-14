@@ -45,7 +45,7 @@ char* returnBMIStatus(float bmi, int asian){ // function to return the status as
     return bmi_status;
 }
 
-void printStatusTable(float mass, float height, float bmi, int asian, char* state, char* bmi_status){ // function to print the status as table
+void printStatusTable(float mass, float height, float bmi, int asian, char* state, char* remarks){ // function to print the status as table
     printf("\n");
     printf("|----------------|------------------------\n");
     printf("|Mass:           |%.2f\n", mass);
@@ -64,7 +64,7 @@ void printStatusTable(float mass, float height, float bmi, int asian, char* stat
     printf("|----------------|------------------------\n");
     printf("|BMI State:      |%s\n", state);
     printf("|----------------|------------------------\n");
-    printf("|Remarks:        |%s\n", bmi_status);
+    printf("|Remarks:        |%s\n", remarks);
     printf("|----------------|------------------------\n");
 
 }
@@ -102,8 +102,8 @@ int main(int argc, char const *argv[]){
     int asian = 3;
     float bmi;
     float cut;
-    char bmi_status[100];
-    char* state;
+    char remarks[100];
+    char* status;
     char temp_asian = 'n';
 
     parse_arg(argc, argv, &mass, &height, &asian);
@@ -148,28 +148,22 @@ int main(int argc, char const *argv[]){
 
 
     bmi = computeBMI(mass, height);
-    // printf("Mass(kg): %.2f\n",mass);
-    // printf("Height(m): %.2f\n",height);
-    // printf("BMI: %.2f\n",bmi);
 
-    // if (asian) printf("Race: %s\n", "Asian");
-    // else printf("Race: %s\n", "Non-Asian");
-
-    state  = returnBMIStatus(bmi, asian);
+    status  = returnBMIStatus(bmi, asian);
     // printf("BMI State: %s\n", state);
 
 
     
     // printf("Remarks: ");
     cut = (bmi-bmi_checkpoints[asian][1]) * pow(height, 2); // mass to cut to become normal
-    if (cut > 0)  sprintf(bmi_status, "You are fat! Please reduce your weight by %.2fkg to remain in the Normal range!", cut);  
-    else sprintf(bmi_status, "You are in the healthy weight range. Maintain your weight you don't want to be a fat ass");
+    if (cut > 0)  sprintf(remarks, "You are fat! Please reduce your weight by %.2fkg to remain in the Normal range!", cut);  
+    else sprintf(remarks, "You are in the healthy weight range. Maintain your weight you don't want to be a fat ass");
 
     // printf(bmi_status);
     //! print the status as table
-    printStatusTable(mass, height, bmi, asian, state, bmi_status);
+    printStatusTable(mass, height, bmi, asian, status, remarks);
 
-    free((void*) state);
+    free((void*) status);
 
     return 0;
 }
